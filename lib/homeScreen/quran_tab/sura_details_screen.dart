@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/homeScreen/mythemedata.dart';
+import 'package:islami_app/homeScreen/quran_tab/quranText.dart';
 import 'package:islami_app/homeScreen/quran_tab/sura_name.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islami_app/homeScreen/screens/quranText.dart';
 import 'package:islami_app/providers/settingsProvider.dart';
 import 'package:provider/provider.dart';
 

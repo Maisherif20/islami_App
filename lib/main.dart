@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/homeScreen/hades_tab/hadethDetailsScreen.dart';
 import 'package:islami_app/homeScreen/homeScreen.dart';
-import 'package:islami_app/homeScreen/screens/sura_details_screen.dart';
+import 'package:islami_app/homeScreen/mythemedata.dart';
 import 'package:islami_app/homeScreen/splashscreen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_app/providers/settingsProvider.dart';
+import 'package:provider/provider.dart';
 
+import 'homeScreen/quran_tab/sura_details_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => SettingsProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,31 +20,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var settingProvider = Provider.of<SettingsProvider>(context);
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          titleTextStyle: TextStyle(fontSize: 30 , color: Colors.black),
-          centerTitle: true,
-        ),
-        scaffoldBackgroundColor: Colors.transparent,
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            unselectedItemColor: Colors.white,
-            selectedItemColor: Colors.black,
-            selectedIconTheme: IconThemeData(
-              size: 40,
-            ),
-            unselectedIconTheme: IconThemeData(
-              size: 30
-            ),
-      ),
-      ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('ar'), // arabix
+      ],
+      locale: Locale(settingProvider.currentLocal),
+      theme: MyThemeData.lightTheme,
+      darkTheme: MyThemeData.darkTheme,
+      themeMode: settingProvider.currentTheme,
       debugShowCheckedModeBanner: false,
-      routes:{
-        SplashScreen.routeName:(context)=>SplashScreen(),
-        HomeScreen.routeName:(context)=> HomeScreen(),
-        SuraDetailsScreen.routeName:(context)=> SuraDetailsScreen(),
+      routes: {
+        SplashScreen.routeName: (context) => SplashScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
+        SuraDetailsScreen.routeName: (context) => SuraDetailsScreen(),
+        HadethDetails.routeName: (context) => HadethDetails()
       },
       initialRoute: SplashScreen.routeName,
     );

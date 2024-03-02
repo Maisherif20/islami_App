@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islami_app/homeScreen/screens/sura_details_screen.dart';
+import 'package:islami_app/homeScreen/quran_tab/sura_details_screen.dart';
 
 class SuraName extends StatelessWidget {
   SuraArgs suraargs;
@@ -14,7 +14,7 @@ class SuraName extends StatelessWidget {
       },
       child: Container(
         alignment: Alignment.center,
-          child: Text(suraargs.title , style:  GoogleFonts.getFont('El Messiri' , fontSize: 25 ),)),
+          child: Text(suraargs.title , style: Theme.of(context).textTheme.titleMedium,)),
     );
   }
 }

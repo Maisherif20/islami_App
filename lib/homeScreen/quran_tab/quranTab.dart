@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/homeScreen/mythemedata.dart';
 import 'package:islami_app/homeScreen/quran_tab/sura_name.dart';
-import 'package:islami_app/homeScreen/screens/sura_details_screen.dart';
+import 'package:islami_app/providers/settingsProvider.dart';
+import 'package:provider/provider.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> suraName = [
@@ -120,35 +122,159 @@ class QuranTab extends StatelessWidget {
     "الفلق",
     "الناس"
   ];
-  List<String> versesNumber = ["٧", "٢٨٦", "٢٠٠", "١٧٦", "١٢٠", "١٦٥", "٢٠٦", "٧٥", "١٢٩", "١٠٩", "١٢٣", "١١١", "٤٣", "٥٢", "٩٩", "١٢٨", "١١١", "١١٠", "٩٨", "١٣٥", "١١٢", "٧٨", "١١٨", "٦٤", "٧٧", "٢٢٧", "٩٣", "٨٨",
-  "٦٩", "٦٠", "٣٤", "٣٠", "٧٣", "٥٤", "٤٥", "٨٣", "١٨٢", "٨٨", "٧٥", "٨٥", "٥٤", "٥٣", "٨٩", "٥٩", "٣٧", "٣٥", "٣٨", "٢٩", "١٨", "٤٥", "٦٠", "٤٩", "٦٢", "٥٥", "٧٨", "٩٦", "٢٩", "٢٢", "٢٤", "١٣", "١٤", "١١", "١١",
-  "١٨", "١٢", "١٢", "٣٠", "٥٢", "٥٢", "٤٤", "٢٨", "٢٨", "٢٠", "٥٦", "٤٠", "٣١", "٥٠", "٤٠", "٤٦", "٤٢", "٢٩", "١٩", "٣٦", "٢٥", "٢٢", "١٧", "١٩", "٢٦", "٣٠", "٢٠", "١٥", "٢١", "١١", "٨", "٥", "١٩", "٥", "٨", "٨", "١١", "١١", "٨", "٣",
-  "٩", "٥", "٤", "٦", "٣", "٦", "٣", "٥", "٤", "٥", "٦"];
+  List<String> versesNumber = [
+    "٧",
+    "٢٨٦",
+    "٢٠٠",
+    "١٧٦",
+    "١٢٠",
+    "١٦٥",
+    "٢٠٦",
+    "٧٥",
+    "١٢٩",
+    "١٠٩",
+    "١٢٣",
+    "١١١",
+    "٤٣",
+    "٥٢",
+    "٩٩",
+    "١٢٨",
+    "١١١",
+    "١١٠",
+    "٩٨",
+    "١٣٥",
+    "١١٢",
+    "٧٨",
+    "١١٨",
+    "٦٤",
+    "٧٧",
+    "٢٢٧",
+    "٩٣",
+    "٨٨",
+    "٦٩",
+    "٦٠",
+    "٣٤",
+    "٣٠",
+    "٧٣",
+    "٥٤",
+    "٤٥",
+    "٨٣",
+    "١٨٢",
+    "٨٨",
+    "٧٥",
+    "٨٥",
+    "٥٤",
+    "٥٣",
+    "٨٩",
+    "٥٩",
+    "٣٧",
+    "٣٥",
+    "٣٨",
+    "٢٩",
+    "١٨",
+    "٤٥",
+    "٦٠",
+    "٤٩",
+    "٦٢",
+    "٥٥",
+    "٧٨",
+    "٩٦",
+    "٢٩",
+    "٢٢",
+    "٢٤",
+    "١٣",
+    "١٤",
+    "١١",
+    "١١",
+    "١٨",
+    "١٢",
+    "١٢",
+    "٣٠",
+    "٥٢",
+    "٥٢",
+    "٤٤",
+    "٢٨",
+    "٢٨",
+    "٢٠",
+    "٥٦",
+    "٤٠",
+    "٣١",
+    "٥٠",
+    "٤٠",
+    "٤٦",
+    "٤٢",
+    "٢٩",
+    "١٩",
+    "٣٦",
+    "٢٥",
+    "٢٢",
+    "١٧",
+    "١٩",
+    "٢٦",
+    "٣٠",
+    "٢٠",
+    "١٥",
+    "٢١",
+    "١١",
+    "٨",
+    "٥",
+    "١٩",
+    "٥",
+    "٨",
+    "٨",
+    "١١",
+    "١١",
+    "٨",
+    "٣",
+    "٩",
+    "٥",
+    "٤",
+    "٦",
+    "٣",
+    "٦",
+    "٣",
+    "٥",
+    "٤",
+    "٥",
+    "٦"
+  ];
   @override
   Widget build(BuildContext context) {
+    var settingProvider = Provider.of<SettingsProvider>(context);
     return Column(
       children: [
-        Expanded(flex:1,child: Image.asset("assests/images/img_3.png")),
-        const SizedBox(height: 10,),
+        Expanded(flex: 1, child: Image.asset("assests/images/img_3.png")),
+        const SizedBox(
+          height: 10,
+        ),
         Expanded(
           flex: 3,
           child: ListView(
             children: [
               Table(
-                border: TableBorder.all(color: Color.fromRGBO(183, 147, 95, 1)),
+                border: settingProvider.currentTheme==ThemeMode.dark
+                    ? TableBorder.all(
+                        color: Color.fromRGBO(250, 204, 29, 1), width: 3)
+                    : TableBorder.all(
+                        color: Theme.of(context).primaryColor, width: 3),
                 children: [
                   TableRow(
                     children: [
                       TableCell(
                         child: Container(
                           alignment: Alignment.center,
-                            child: Text('عدد الايات',style: GoogleFonts.getFont('El Messiri' , fontSize: 25))),
+                          child: Text('عدد الايات',
+                              style: Theme.of(context).textTheme.titleMedium),
+                        ),
                       ),
                       TableCell(
-                        child: Container(
-                          alignment: Alignment.center,
-                            child: Text('اسم السوره' , style: GoogleFonts.getFont('El Messiri' , fontSize: 25),)),
-                      ),
+                          child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'اسم السوره',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      )),
                     ],
                   ),
                   for (int i = 0; i < suraName.length; i++)
@@ -156,11 +282,15 @@ class QuranTab extends StatelessWidget {
                       children: [
                         TableCell(
                           child: Container(
-                            alignment: Alignment.center,
-                              child: Text(versesNumber[i] , style: TextStyle(fontSize: 25),)),
+                              alignment: Alignment.center,
+                              child: Text(
+                                versesNumber[i],
+                                style:  Theme.of(context).textTheme.titleMedium,
+                              )),
                         ),
                         TableCell(
-                          child: SuraName(suraargs: SuraArgs(title:suraName[i]  , index: i )),
+                          child: SuraName(
+                              suraargs: SuraArgs(title: suraName[i], index: i)),
                         ),
                       ],
                     ),
@@ -179,5 +309,3 @@ class QuranTab extends StatelessWidget {
 //           ),
 //           itemCount: suraName.length,
 //         )
-
-
