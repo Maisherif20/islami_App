@@ -18,6 +18,7 @@ class _SettingTabState extends State<SettingTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          //of Theme
           Padding(
             padding: const EdgeInsets.only(left: 18),
             child: Text(AppLocalizations.of(context)!.theme,
@@ -44,6 +45,7 @@ class _SettingTabState extends State<SettingTab> {
               ),
             ),
           ),
+          //of Language
           Padding(
             padding: const EdgeInsets.only(left: 18),
             child: Text(AppLocalizations.of(context)!.language,
@@ -77,7 +79,6 @@ class _SettingTabState extends State<SettingTab> {
 
   void showThemeBottomSheet(){
     showModalBottomSheet(context: context, builder: (context)=>ThemeBottomSheet());
-
   }
   void showLanguageBottomSheet(){
     showModalBottomSheet(context: context, builder: (context)=> LanguageBottomSheet());

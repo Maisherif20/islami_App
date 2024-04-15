@@ -11,7 +11,12 @@ import 'homeScreen/quran_tab/sura_details_screen.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-      create: (context) => SettingsProvider(), child: MyApp()));
+      create: (buildContext) {
+        return SettingsProvider()
+          ..getLang()
+          ..getTheme();
+      },
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
